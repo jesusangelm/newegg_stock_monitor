@@ -90,6 +90,4 @@ test:
 #
 production:
   <<: *default
-  database: nesm_production
-  username: nesm
-  password: <%= ENV['NESM_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
