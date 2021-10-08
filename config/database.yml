@@ -21,17 +21,13 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-
 development:
   <<: *default
   database: nesm_development
-  host: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:hostname] %>
-  username: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:username] %>
-  password: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:password] %>
-  port: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:port] %>
+  host: <%= Rails.application.credentials.dig(:development, :pg, :hostname) %>
+  username: <%= Rails.application.credentials.dig(:development, :pg, :username) %>
+  password: <%= Rails.application.credentials.dig(:development, :pg, :password) %>
+  port: <%= Rails.application.credentials.dig(:development, :pg, :port) %>
 
 
   # The specified database role being used to connect to postgres.
@@ -67,10 +63,10 @@ development:
 test:
   <<: *default
   database: nesm_test
-  host: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:hostname] %>
-  username: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:username] %>
-  password: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:password] %>
-  port: <%= Rails.application.credentials.config[Rails.env.to_sym][:pg][:port] %>
+  host: <%= Rails.application.credentials.dig(:development, :pg, :hostname) %>
+  username: <%= Rails.application.credentials.dig(:development, :pg, :username) %>
+  password: <%= Rails.application.credentials.dig(:development, :pg, :password) %>
+  port: <%= Rails.application.credentials.dig(:development, :pg, :port) %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -92,4 +88,6 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
