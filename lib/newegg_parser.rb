@@ -2,7 +2,7 @@ require 'scrapper'
 
 class NeweggParser
   XBOX_NEWEGG_SELLER_LIST = 'https://www.newegg.com/p/pl?d=xbox+series+x&N=8000'
-  CONSOLE_TYPE_REGEX = { xsx: /Xbox Series X/i, xss: /Xbox Series S/i }
+  CONSOLE_TYPE_REGEX = { xsx: / Xbox Series X /i, xss: / Xbox Series S /i }
   NO_STOCK_REGEX = /OUT OF Stock/i
   ITEM_PROMO_REGEX = /This item can only be purchased with a combo/i
 
