@@ -29,7 +29,6 @@ development:
   password: <%= Rails.application.credentials.dig(:development, :pg, :password) %>
   port: <%= Rails.application.credentials.dig(:development, :pg, :port) %>
 
-
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -90,4 +89,8 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  host: <%= ENV.fetch('DATABASE_HOST') %>
+  username: <%= ENV.fetch('POSTGRES_USER') %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
+  database: <%= ENV.fetch('POSTGRES_DB') %>
+  # url: <%= ENV['DATABASE_URL'] %>
